@@ -42,7 +42,7 @@ function _dfs(graph, node, visited, res) {
 }
 
 function _main() {
-    const graph = { adjList: {} };
+    let graph = { adjList: {} };
     _addVertex("1", graph);
     _addVertex("2", graph);
     _addVertex("5", graph);
