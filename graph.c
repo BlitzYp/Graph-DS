@@ -56,6 +56,7 @@ void add_edge(graph_t* graph, uint8_t s, uint8_t d)
 
     /* Storing the current src element in the next location and then  
     replacing the current src element with the new number/element */
+    
     dest->next = graph->adj_list[s]; 
     graph->adj_list[s] = dest; 
 
