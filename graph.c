@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 
+/* Struct for a single node in the adj_list */
 struct vertex_t
 {
     uint8_t v;
@@ -40,6 +41,7 @@ struct graph_t* create_graph(uint8_t size)
     graph->size = size;
     graph->adj_list = malloc(sizeof(struct vertex_t) * size);
 
+    /* Setting all values to null*/
     for (uint8_t i = 0; i < size; i++)
         graph->adj_list[i] = NULL;
     return graph;
@@ -51,8 +53,11 @@ void add_edge(graph_t* graph, uint8_t s, uint8_t d)
     struct vertex_t* dest = create_node(d);
     
     /* Adding a edge from src to dest */
-    dest->next = graph->adj_list[s];
-    graph->adj_list[s] = dest;
+
+    /* Storing the current src element in the next location and then  
+    replacing the current src element with the new number/element */
+    dest->next = graph->adj_list[s]; 
+    graph->adj_list[s] = dest; 
 
     /* Adding a edge from dest to src */
     src->next = graph->adj_list[d];
