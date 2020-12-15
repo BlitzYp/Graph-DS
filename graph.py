@@ -57,9 +57,6 @@ def main():
     graph.add_edge("5", "2")
     graph.add_edge("6", "2")
     
-    #BFS
-    bfs(graph.adject_list, "1")
-
     #DFS
     visited = set()
     res = dfs(graph.adject_list, "5", visited, [])
