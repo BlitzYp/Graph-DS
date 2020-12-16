@@ -22,9 +22,12 @@ void add_edge(graph_t* graph, uint8_t node1, uint8_t node2);
 int main()
 {
     graph_t* graph = create_graph(10);
-    add_edge(graph, 1, 0);
-    struct vertex_t** list = graph->adj_list;
-    printf("%d\n", list[0]->v);
+    add_edge(graph, 0, 1);
+    add_edge(graph, 0, 2);
+    add_edge(graph, 0, 3);
+    add_edge(graph, 3, 1);
+    struct vertex_t** list = &graph->adj_list[3];
+    printf("Next elem: %d\n", list[0]->v);
 }
 
 struct vertex_t* create_node(uint8_t value)
@@ -56,7 +59,6 @@ void add_edge(graph_t* graph, uint8_t s, uint8_t d)
 
     /* Storing the current src element in the next location and then  
     replacing the current src element with the new number/element */
-    
     dest->next = graph->adj_list[s]; 
     graph->adj_list[s] = dest; 
 
