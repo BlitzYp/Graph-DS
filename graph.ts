@@ -16,6 +16,8 @@ const addEdge = <T>(node1: string, node2: string, graph: adjacentList<T>) => {
     return;
 }
 
+
+// Iterative way to do DFS
 const showConnections = <T>(list: adjacentList<T>) => {
     const allNodes: string[] = Object.keys(list.data);
     for (let node of allNodes) {
