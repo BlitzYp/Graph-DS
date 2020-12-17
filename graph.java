@@ -57,6 +57,12 @@ public class Main {
             }
             return res;
         }
+        public void showConnections() {
+            for (int i: values) {
+                ArrayList<Integer> connections = adjList.get(i);
+                System.out.println(i + "->" + connections);
+            }     
+        }
     }
     public static void main(String[] args) {
         Graph graph = new Graph();
