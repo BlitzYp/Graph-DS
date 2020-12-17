@@ -1,51 +1,64 @@
-using System;
 using System.Collections.Generic;
 using System.Collections;
+using System;
 
-class Program {
-  class Graph
+class Graph
+{
+  public Dictionary<int, ArrayList> AdjList;
+  
+  public Graph() 
   {
-    public LinkedList<int>[] AdjList;
-    public Graph(int size) 
-    {
-      AdjList = new LinkedList<int>[size];
-      for (int i = 0; i < size; i++) {
-        AdjList[i] = new LinkedList<int>();
-      }
-    }
+    AdjList = new Dictionary<int, ArrayList>();
+  }
+  
+  public void Bfs(int StartNode) 
+  {
+    Queue<int> queue = new Queue<int>();
+    HashSet<int> visited = new HashSet<int>();
 
-    public void Bfs(int StartNode) 
-    {
-      Queue<int> queue = new Queue<int>();
-      HashSet<int> visited = new HashSet<int>();
-      queue.Enqueue(StartNode);
-      visited.Add(StartNode);
+    queue.Enqueue(StartNode);
+    visited.Add(StartNode);
 
-      while (queue.Count != 0) 
-      {
-        int Vertex = queue.Dequeue();
-        Console.WriteLine(Vertex);
-        foreach (int i in AdjList[Vertex]) {
-          if (!visited.Contains(i)) {
+    while (queue.Count != 0) 
+    {
+      int Vertex = queue.Dequeue();
+      Console.WriteLine(Vertex);
+      foreach(int i in AdjList[Vertex]) {
+        if (!visited.Contains(i)) 
+        {
             visited.Add(i);
             queue.Enqueue(i);
-          }
         }
       }
     }
-    public void AddEdge(int node1, int node2)
-    {
-      AdjList[node1].AddLast(node2);
-      AdjList[node2].AddLast(node1);
-    }
   }
-  public static void Main(string[] args)
+  
+  public LinkedList<int> Dfs(int StartNode, HashSet<int> visited, LinkedList<int> res)
   {
-    Graph graph = new Graph(5);
-    graph.AddEdge(0, 1);
-    graph.AddEdge(0, 2);
-    graph.AddEdge(1, 2);
-    graph.Bfs(0);
+    if (AdjList[StartNode] == null) 
+        return res;
+
+    visited.Add(StartNode);
+    res.AddLast(StartNode);
+
+    foreach(int i in AdjList[StartNode]) {
+        if (!visited.Contains(i)) 
+        {
+            Dfs(i, visited, res);
+        }
+    }
+    return res;
+  }
+  
+  public void AddVertex(int node)
+  {
+    AdjList.Add(node, new ArrayList());
+  }
+  
+  public void AddEdge(int node1, int node2) 
+  {
+    AdjList[node1].Add(node2);
+    AdjList[node2].Add(node1);
   }
 }
 
